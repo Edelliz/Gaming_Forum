@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../js/Shared.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/Shared.css">
+    <link rel="stylesheet" href="../css/Posts.css">
+</head>
+
+<body>
+<header>
+    <nav class="navbar navbar-dark bg-dark navbar-expand navbar-toggleable mb-3 w-100">
+        <div class="container-fluid w-100">
+            <img src="../img/eye.png" class="logo position-absolute pb-2" />
+            <a class="siteName navbar-brand ms-5 ps-4" href="../html/PopularSections.html">
+                <h2>Gaming Forum</h2>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse d-inline-flex justify-content-between w-100">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link  h5 p-0 m-0 ms-5" href="../html/AllSections.html">Разделы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  h5 p-0 m-0 ms-5" href="../html/Announcement.html">Объявления</a>
+                    </li>
+                </ul>
+
+
+                <ul class="ChangeablePartNavBar navbar-nav flex-grow-1 d-flex justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link  h5 p-0 m-0 ms-5" id="Login">Вход</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  h5 p-0 m-0 ms-5" id="Register">Регистрация</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+
+<div class="container  mb-3">
+    <main role="main" class="row d-flex  align-items-baseline">
+        <div class="row w-100 d-flex justify-content-center">
+            <div class="mainContainer col-9 p-2 border rounded ps-3 pe-3 pb-4">
+                <div class="blog-post-details">
+                    <h1 id="namePost">Name</h1>
+                    <div class="blog-post-info d-flex flex-row justify-content-between">
+                        <div class="d-flex flex-row"><p id="usernamePost" class="me-2 ms-2">UserName </p> | <p id="sectionNamePost" class="me-2 ms-2">Section.Name</p> | <p id="createdPost" class="me-2 ms-2">Created</p></div>
+                        <div id="adminEditPlace" class="d-none">
+                            <!--Для админа-->
+                            <a  class="text-secondary" data-bs-toggle="modal" data-bs-target="#modalEditSection">Редактировать</a>
+                            <text>|</text>
+                            <a  class="text-secondary" data-bs-toggle="modal" data-bs-target="#modalDeleteSection">Удалить</a>
+
+                            <!-- Модальное окно для удаления поста - начало -->
+                            <div class="modal fade" id="modalDeleteSection" tabindex="-1"
+                                 aria-labelledby="modalDeleteSectionLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content border border-dark">
+                                        <div class="modal-header bg-dark">
+                                            <h5 class="modal-title text-light" id="modalDeleteSectionLabel">Вы действительно хоите удалить этот раздел?</h5>
+                                            <button type="button" class="btn btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body bg-secondary">
+                                            <h6 id="delete-modal-body-name">Название: name_section</h6>
+                                            <h6 id="delete-modal-body-text">Описание постов: number_posts</h6>
+                                            <h6 id="delete-modal-body-created">Дата создания: date_created</h6>
+                                            <h6 id="delete-modal-body-owner">Создатель: owner_post</h6>
+                                        </div>
+                                        <div class="modal-footer bg-dark">
+                                            <button id="bntDelPostSubmit" type="submit" class="btnProject btn btn-dark">Да</button>
+                                            <button type="button" class="btnProject btn btn-dark"
+                                                    data-bs-dismiss="modal">Нет</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Модальное окно для удаления категории - конец -->
+
+                            <!-- Модальное окно для редактирования категории - начало -->
+                            <div class="modal fade" id="modalEditSection" tabindex="-1"
+                                 aria-labelledby="modalEditSectionLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-dark">
+                                            <h5 class="modal-title text-light" id="modalEditSectionLabel">Редактирование </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body bg-secondary">
+                                            <h6>Название: </h6>
+                                            <input id="edit-modal-body-name" class="form-control" type="text"  required>
+                                            <h6>Описание: </h6>
+                                            <input id="edit-modal-body-text" class="form-control" type="text" required>
+                                        </div>
+                                        <div class="modal-footer bg-dark">
+                                            <button id="bntEdSubmit" type="submit" class="btnProject btn btn-dark">Сохранить</button>
+                                            <button type="button" class="btnProject btn btn-dark"
+                                                    data-bs-dismiss="modal">Отменить</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Модальное окно для редактирования  категории - конец -->
+
+                        </div>
+                    </div>
+                    <h3 class="mb-2 mt-2">Описание</h3>
+                    <div class="blogPostText ms-3">@Model.Text</div>
+                </div>
+
+                <div class="">
+                    <h3 class="mb-4 mt-2">Вложения</h3>
+                    <div class="photoPlace d-flex flex-wrap-reverse w-100 mt-4"></div>
+
+                    <form method="post" action="" enctype="multipart/form-data" id="myform" class="mt-4 text-end d-none">
+                        <div>
+                            <input type="file" id="file" name="file" />
+                        </div>
+                    </form>
+                    <input type="button" class="btnProject btn btn-dark align-self-end mt-3 d-none" value="Добавить" id="but_load">
+                    <!--Для админа-->
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            <img class="img-fluid  rounded" />
+                            <!--Для админа-->
+                            <div class="d-none caption text-center">
+                                <p><a class="btnDeleteAttachment btn btn-danger mt-2">Удалить</a></p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mb-4">Обсуждение</h3>
+                <form method="post" id="ToComment" >
+                    <input id="inputComment" name="Text" class="form-control" />
+                    <div class="form-group mt-3 w-100 text-end">
+                        <input id="submitComment" value="Комментировать" class="btnProject btn btn-dark end-0" />
+                    </div>
+                </form>
+
+                <text id="abilityToComment" class="d-none">
+                    Для возможности комментирования необходимо авторизироваться
+                </text>
+
+                <div class="blog-posts">
+                    <div class="blog-posts-items">
+
+                    </div>
+
+
+                    <div id="commentTemplate" class="blog-post panel panel-default rounded bg-light border border-2 border-dark mt-3 d-none">
+                        <div class="panel-heading inputFields border-bottom border-1 border-dark  ps-2 pt-1 pb-1 w-100 d-flex flex-row justify-content-between">
+                            <div id="InfoComment" class="text-dark ps-2">@item.User.UserName | @item.Created</div>
+                            <div id="DateComment"  class="text-end text-dark pe-3">
+
+                            </div>
+                        </div>
+                        <div class="panel-body inputFields pt-2 pb-2 ps-4 ">
+                            <div id="textComment" class="blog-post-text inputFields text-dark">@item.Text</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-1"></div>
+            <div class="mainContainer col-2 p-2 border rounded d-flex align-self-start">
+                <div id="newAnnouncements">
+                    <h6 class="text-light text-center w-100">Объявления</h6>
+                    <!-- Шаблон одного объявления-->
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="../js/Post.js"></script>
+<script src="../js/NewAnnouncement.js"></script>
+<script src="../js/InReg.js"></script>
+</body>
+
+</html>

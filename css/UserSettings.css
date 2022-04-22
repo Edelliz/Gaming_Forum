@@ -1,0 +1,7 @@
+.manageNav {
+    color: #cac9c9;
+}
+
+.manageNav:hover {
+    color: rgba(200, 254, 254, 0.81);
+}

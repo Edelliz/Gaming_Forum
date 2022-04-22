@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/Shared.css">
+    <link rel="stylesheet" href="../css/Announcement.css">
+    <script src="../js/Shared.js"></script>
+</head>
+
+<body>
+<header>
+    <nav class="navbar navbar-dark bg-dark navbar-expand navbar-toggleable mb-3 w-100">
+        <div class="container-fluid w-100">
+            <img src="../img/eye.png" class="logo position-absolute pb-2" />
+            <a class="siteName navbar-brand ms-5 ps-4" href="../html/PopularSections.html">
+                <h2>Gaming Forum</h2>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse d-inline-flex justify-content-between w-100">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link  h5 p-0 m-0 ms-5" href="../html/AllSections.html">Разделы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  h5 p-0 m-0 ms-5" href="../html/Announcement.html">Объявления</a>
+                    </li>
+                </ul>
+
+
+                <ul class="ChangeablePartNavBar navbar-nav flex-grow-1 d-flex justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link  h5 p-0 m-0 ms-5" id="Login">Вход</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  h5 p-0 m-0 ms-5" id="Register">Регистрация</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+</header>
+<div class="container  mb-3">
+    <main role="main" class="row d-flex  align-items-baseline">
+        <div class="mainContainer col-9 p-2 border rounded ">
+            <div class="d-flex flex-row justify-content-between">
+                <div class="h4 pb-2 text-light p-0 m-0">Объявления</div>
+                <!-- Только для админа -->
+                <p class="p-0 pt-1 m-0">
+                    <a id="aCreateSection" class="d-none p-0 m-0 text-light" data-bs-toggle="modal"
+                       data-bs-target="#modalCreateSection">Добавить объявление</a>
+                </p>
+                <!-- Только для админа -->
+            </div>
+            <!-- Модальное окно для создания категории - начало -->
+            <div class="modal fade" id="modalCreateSection" tabindex="-1"
+                 aria-labelledby="modalCreateSectionLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content border border-dark">
+                        <div class="modal-header bg-dark">
+                            <h5 class="modal-title text-light" id="modalCreateSectionLabel">Добавить объявление?</h5>
+                            <button type="button" class="btn btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body bg-secondary">
+                            <input id="create-modal-body-name" class="form-control" type="text" value="name_section" required>
+                            <input id="create-modal-body-text" class="form-control" type="text" value="text_section" required>
+                        </div>
+                        <div class="modal-footer bg-dark">
+                            <button id="bntCreateSubmit" type="submit" class="btnProject btn btn-dark">Да</button>
+                            <button type="button" class="btnProject btn btn-dark"
+                                    data-bs-dismiss="modal">Нет</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Модальное окно для создания категории - конец -->
+            <table class="table rounded" id="OrderAnnouncement">
+                <tbody id="tOrderSections">
+                <!-- Шаблон одного раздела -->
+                </tbody>
+            </table>
+        </div>
+        <div class="col-1"></div>
+        <div class="mainContainer col-2 p-2 border rounded d-flex align-self-start flex-md-column">
+            <h6 class="text-light text-center w-100">Объявления</h6>
+            <div id="newAnnouncements">
+                <!-- Шаблон одного объявления-->
+
+            </div>
+        </div>
+    </main>
+</div>
+
+<table class="table rounded d-none">
+    <tbody>
+    <!-- Шаблон одного раздела -->
+    <tr class="d-none" id="templateSection">
+        <td>
+            <a id="titleSection" class="TitleSection text-dark"></a>
+            <a id="textSection" class="TextSection text-dark ms-5"></a>
+        </td>
+
+        <!-- Только для админа -->
+        <td id="adminEditPlace" class="d-none d-flex justify-content-center">
+            <a class="text-secondary" id="btnDeleteSection" data-bs-toggle="modal"
+               data-bs-target="#modalDeleteSection">Удалить</a>|
+
+            <!-- Модальное окно для удаления категории - начало -->
+            <div class="modal fade" id="modalDeleteSection" tabindex="-1"
+                 aria-labelledby="modalDeleteSectionLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content border border-dark">
+                        <div class="modal-header bg-dark">
+                            <h5 class="modal-title text-light" id="modalDeleteSectionLabel">Вы действительно хоите удалить это объявление?</h5>
+                            <button type="button" class="btn btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body bg-secondary">
+                            <h6 id="delete-modal-body-name">Название: name_section</h6>
+                            <h6 id="delete-modal-body-text">Описание: text_section</h6>
+                        </div>
+                        <div class="modal-footer bg-dark">
+                            <button id="bntDelSubmit" type="submit" class="btnProject btn btn-dark">Да</button>
+                            <button type="button" class="btnProject btn btn-dark"
+                                    data-bs-dismiss="modal">Нет</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Модальное окно для удаления категории - конец -->
+
+            <a class="text-secondary" id="btnEditSection" data-bs-toggle="modal"
+               data-bs-target="#modalEditSection">Редактировать</a>
+
+            <!-- Модальное окно для редактирования категории - начало -->
+            <div class="modal fade" id="modalEditSection" tabindex="-1"
+                 aria-labelledby="modalEditSectionLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-dark">
+                            <h5 class="modal-title text-light" id="modalEditSectionLabel">Редактирование </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body bg-secondary">
+                            <h6>Название: </h6>
+                            <input id="edit-modal-body-name" class="form-control" type="text" value="name_section" required>
+                            <h6>Описание: </h6>
+                            <input id="edit-modal-body-text" class="form-control" type="text" value="text_section" required>
+                        </div>
+                        <div class="modal-footer bg-dark">
+                            <button id="bntEdSubmit" type="submit" class="btnProject btn btn-dark">Сохранить</button>
+                            <button type="button" class="btnProject btn btn-dark"
+                                    data-bs-dismiss="modal">Отменить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Модальное окно для редактирования  категории - конец -->
+        </td>
+        <!-- Только для админа -->
+        <td>
+            <!-- Кол-во постов в разделе -->
+            <p id="numberPost" class="m-0 p-0 text-end text-dark"></p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="../js/Announcement.js"></script>
+<script src="../js/NewAnnouncement.js"></script>
+<script src="../js/InReg.js"></script>
+</body>
+
+</html>
